@@ -6,9 +6,6 @@ import java.util.ListIterator;
 
 public class Exercise2 {
     public static void runProgram(){
-        /*Crea y rellena un List<Integer>.
-        Crea un segundo List<Integer> e inserta en la segunda lista los elementos de la primera en orden inverso.
-        Emplea los objetos ListIterator para leer los elementos de la primera lista e insertarlos en la segunda. */
         // Creating the first list
         List<Integer> firstList = new ArrayList<Integer>();
 
