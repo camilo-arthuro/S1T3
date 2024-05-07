@@ -1,16 +1,18 @@
-import Classes.Month;
+package N1EX1;
+
+import N1EX1.Classes.Month;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Exercise3 {
+public class Exercise1 {
     public static void runProgram() {
         // Creating the ArrayList
         ArrayList<Month> monthList = new ArrayList<Month>();
 
-        // Creating the Classes.Month objects
+        // Creating the N1EX1.Classes.Month objects
         Month month1 = new Month("January");
         Month month2 = new Month("February");
         Month month3 = new Month("March");
@@ -23,7 +25,7 @@ public class Exercise3 {
         Month month11 = new Month("November");
         Month month12 = new Month("December");
 
-        // Adding the Classes.Month objects to the ArrayList
+        // Adding the N1EX1.Classes.Month objects to the ArrayList
         monthList.add(month1);
         monthList.add(month2);
         monthList.add(month3);
@@ -36,12 +38,12 @@ public class Exercise3 {
         monthList.add(month11);
         monthList.add(month12);
 
-        // Creating and adding the new Classes.Month to the ArrayList
+        // Creating and adding the new N1EX1.Classes.Month to the ArrayList
         Month month8 = new Month("August");
         monthList.add(7,month8);
 
         // Showing the months
-        System.out.println("Showing the Classes.Month from the ArrayList");
+        System.out.println("Showing the N1EX1.Classes.Month from the ArrayList");
         for (Month month : monthList){
             System.out.println(month.getName());
         }
@@ -53,7 +55,7 @@ public class Exercise3 {
         // Repeating a Month
         hashsetList.add(month8);
 
-        System.out.println("Showing the Classes.Month in the HashSet");
+        System.out.println("Showing the N1EX1.Classes.Month in the HashSet");
         System.out.println("Using a for loop");
         for (Month month : hashsetList){
             System.out.println(month.getName());

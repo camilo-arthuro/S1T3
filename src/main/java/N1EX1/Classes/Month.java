@@ -1,4 +1,4 @@
-package Classes;
+package N1EX1.Classes;
 
 public class Month {
     // Attribute
