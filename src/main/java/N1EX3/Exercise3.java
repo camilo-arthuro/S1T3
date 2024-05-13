@@ -1,57 +1,34 @@
 package N1EX3;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Exercise3 {
+    static Scanner input = new Scanner(System.in);
+
     public static void runProgram(){
-        /*Dado el archivo countrties.txt (revisa el apartado recursos) que contiene países y capitales.
-        El programa debe leer el archivo y guardar los datos en un HashMap<String, String>. El programa
-        pide el nombre del usuario/a, y después debe mostrar un país de forma aleatoria, guardado en HashMap.
-        Se trata de que el usuario debe escribir el nombre de la capital del país en cuestión. Si acierta
-        se le suma un punto. Esta acción se repite 10 veces. Una vez solicitadas las capitales de 10 países
-        de forma aleatoria, entonces debe guardarse en un fichero llamado classificacio.txt, el nombre del usuario
-        y su puntuación.
-         */
         //Variables
-        Scanner input = new Scanner(System.in);
         String userName = "";
         String capital = "";
         int point = 0;
-        Map<String, String> map = new HashMap<String, String>();
 
         //Request the username and start the game
         System.out.println("Welcome, enter your username:");
         userName = input.next();
-        map = readFile();
-
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("Ok " + userName + " guess the capital of: " + entry.getKey());
-            capital = input.next();
-            if (capital.equalsIgnoreCase(entry.getValue())){
-                point++;
-                System.out.println("Excellent! You have " + point + " points");
-            } else {
-                System.out.println("Sorry! No points at this time, you have " + point + " points");
-            }
-        }
+        getRandomCountry(userName,capital,point);
     }
 
     //Read the file.txt and save the data in a HashMap<String, String>
     public static Map<String, String> readFile(){
         Map<String, String> capitals = new HashMap<String, String>();
 
-        try {
-            FileReader file1 = new FileReader("src/main/java/N1EX3/txt/countries.txt");
-            BufferedReader reader = new BufferedReader(file1);
+        try (FileReader fr = new FileReader("src/main/java/N1EX3/txt/countries.txt"); BufferedReader br = new BufferedReader(fr)){
             String line = "";
             String[] parts;
             boolean complete = false;
 
             while (!complete){
-                line = reader.readLine();
+                line = br.readLine();
                 if(line!=null){
                     parts = line.split(" ");
                     capitals.put(parts[0],parts[1]);
@@ -59,13 +36,66 @@ public class Exercise3 {
                     complete = true;
                 }
             }
-            file1.close();
         } catch (IOException e) {
             System.out.println("File not found");
         }
         return capitals;
     }
 
-    //Save the results in a new file.txt
+    public static void getRandomCountry(String userName, String capital, int point){
+        ArrayList<String> key = getCountries();
+        ArrayList<String> value = getCity();
+        Random random = new Random();
+        int randomNum = 0;
+        String randomCountry = "";
+        String randomCity = "";
 
+        for (int i = 0; i < 10; i++) {
+            randomNum = random.nextInt(key.size());
+            randomCountry = key.get(randomNum);
+            randomCity = value.get(randomNum);
+
+            System.out.println("Ok " + userName + " guess the capital of: " + randomCountry);
+            capital = input.next();
+            if (capital.equalsIgnoreCase(randomCity)){
+                point++;
+                System.out.println("Excellent! You have " + point + " points");
+            } else {
+                System.out.println("Sorry! No points at this time, you have " + point + " points");
+            }
+        }
+        saveData(userName, point);
+    }
+
+    public static ArrayList<String> getCountries(){
+        Map<String, String> map = new HashMap<String, String>();
+        ArrayList<String> key;
+
+        map = readFile();
+        key = new ArrayList<>(map.keySet());
+
+        return key;
+    }
+
+    public static ArrayList<String> getCity(){
+        Map<String, String> map = new HashMap<String, String>();
+        ArrayList<String> value;
+
+        map = readFile();
+        value = new ArrayList<>(map.values());
+
+        return value;
+    }
+
+    //Save the results in a new file.txt
+    public static void saveData(String userName, int point){
+        try (FileWriter results = new FileWriter("src/main/java/N1EX3/txt/classificacio.txt", true);BufferedWriter bw = new BufferedWriter(results)){
+            String data = "User: " + userName + ". Total points: " + point + "\n";
+
+            bw.write(data);
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+    }
 }
