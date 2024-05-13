@@ -11,10 +11,10 @@ public class Exercise1 {
         Set<String> restaurantList = new HashSet<String>();
 
         // Restaurant objects
-        Restaurant r1 = new Restaurant("Blue", 10);
+        Restaurant r1 = new Restaurant("Yellow", 10);
         Restaurant r2 = new Restaurant("Blue", 5);
-        Restaurant r3 = new Restaurant("Blue", 9);
-        Restaurant r4 = new Restaurant("Blue", 9);
+        Restaurant r3 = new Restaurant("Red", 9);
+        Restaurant r4 = new Restaurant("Red", 9);
 
         // Adding the restaurants to the list
         restaurantList.add(r1.toString());
