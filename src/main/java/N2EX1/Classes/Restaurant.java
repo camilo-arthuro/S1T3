@@ -12,7 +12,6 @@ public class Restaurant {
     }
 
     // Getter
-
     public String getName() {
         return name;
     }
@@ -21,11 +20,18 @@ public class Restaurant {
     }
 
     // Setter
-
     public void setName(String name) {
         this.name = name;
     }
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                '}';
     }
 }
