@@ -1,6 +1,6 @@
 package N2EX1.Classes;
 
-public class Restaurant {
+public class Restaurant implements Comparable<Restaurant>{
     // Attributes
     private String name;
     private int score;
@@ -27,6 +27,16 @@ public class Restaurant {
         this.score = score;
     }
 
+    // compareTo()
+    public int compareTo(Restaurant another){
+        int result = this.name.compareTo(another.name);
+        if (result == 0){
+            result = Integer.compare(this.score, another.score);
+        }
+        return result;
+    }
+
+    // toString()
     @Override
     public String toString() {
         return "Restaurant{" +
